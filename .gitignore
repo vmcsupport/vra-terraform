@@ -1,0 +1,20 @@
+# MacOS
+**/.DS_Store
+
+# Local Terraform directories
+**/.terraform/*
+**/terraform.tfstate.d/*
+**/testproject/*
+
+# Local State files
+*.tfstate
+*.tfstate.
+
+tfplan
+
+terraform\.tfvars
+
+terraform\.tfstate\.backup
+
+**/**.vscode
+/.project

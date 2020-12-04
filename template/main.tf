@@ -1,0 +1,3 @@
+module "datalookup" {
+  source = "../data"
+}
