@@ -15,3 +15,5 @@ variable "custuin" {
   description = "Customer UIN - passed via vRA"
 ##  default     = "custuin"
 }
+
+############### end of template ###############

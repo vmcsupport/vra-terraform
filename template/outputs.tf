@@ -27,3 +27,5 @@ output "random_value" {
   description = "random"
   value       = module.datalookup.random_value.*
 }
+
+############### end of template ###############

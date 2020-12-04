@@ -13,8 +13,10 @@ variable "custowner" {
 variable "custuin" {
   type        = string
   description = "Customer UIN - passed via vRA"
-  default     = "custuin"
+##  default     = "custuin"
 }
+
+############### end of template ###############
 
 variable "ingress_rules" {
   type = list(object({
@@ -40,4 +42,5 @@ variable "computerip" {
 variable "publicfriendlyname" {
   type        = string
   description = "Friendly dns name to attach to ALB instances"
+  default     = ""
 }
