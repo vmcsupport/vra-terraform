@@ -30,10 +30,10 @@ output "random_value" {
 
 ############### end of template ###############
 
-output "loadbalancer_address" {
-  description = "load balancer Amazon dns_name"
-  value       = aws_lb.alb_public_to_vmc.dns_name
-}
+#output "loadbalancer_address" {
+#  description = "load balancer Amazon dns_name"
+#  value       = aws_lb.alb_public_to_vmc.dns_name
+#}
 
 output "public_dns_name2" {
   value = "${local.publicfriendlyname}.${module.datalookup.acmpublicdomain.domain}"
