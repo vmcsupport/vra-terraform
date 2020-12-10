@@ -17,15 +17,6 @@ variable "custuin" {
 }
 
 ############### end of template ###############
-variable "ingress_rules_map" {
-  type = map
-  #
-  #    port        = 4403
-  #    protocol    = "HTTPS"
-  #    cidr_blocks = ["0.0.0.0/0", "192.168.56.132/32"]
-  #
-}
-
 variable "computerip" {
   type        = list
   description = "ip to attach to the target group"
