@@ -17,7 +17,7 @@ variable "custuin" {
 }
 
 ############### end of template ###############
-variable "ingress_rules" {
+variable "ingress_rules_map" {
   type = map
   #
   #    port        = 4403
@@ -37,3 +37,19 @@ variable "publicfriendlyname" {
   description = "Friendly dns name to attach to ALB instances"
   default     = ""
 }
+
+variable "ingress_rules" {
+  type = list(object({
+    port        = number
+    cidr_blocks = any
+    protocol    = string
+  }))
+#  default = [
+#    {
+#      port = 443
+#      cidr_blocks = ["notset"]
+#      protocol    = HTTPS
+#    }
+#  ]
+}
+

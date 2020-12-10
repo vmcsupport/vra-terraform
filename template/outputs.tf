@@ -24,7 +24,7 @@ output "tag_uin" {
 }
 
 output "random_value" {
-  description = "random"
+  description = "randomly generated values"
   value       = module.datalookup.random_value.*
 }
 

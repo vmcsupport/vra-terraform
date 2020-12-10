@@ -47,11 +47,16 @@ output "publicdomain" {
 }
 
 output "random_value" {
-  description = "random"
+  description = "randomly generated values"
   value       = random_id.random_value
 }
 
 output "transitvpc" {
   description = "Transit VPC id <see also vpcid>"
   value       = data.aws_vpc.transitvpc
+}
+
+output "s3_alb_logs" { 
+  description = "S3 bucket for alb logs"
+  value       = data.aws_s3_bucket.vra-alb-logs
 }

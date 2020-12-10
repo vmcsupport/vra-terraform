@@ -1,11 +1,13 @@
+############### end of template ###############
 terraform {
   required_providers {
     aws = {
-      version = ">= 2.7.0"
+      source  = "hashicorp/aws"
+      version = ">= 0.13"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.0.0"
     }
   }
-}
-
-provider "random" {
-  version = "3.0.0"
 }

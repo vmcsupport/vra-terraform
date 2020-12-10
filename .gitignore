@@ -9,7 +9,7 @@
 # Local State files
 *.tfstate
 *.tfstate.
-
+**/variables.tfvars
 tfplan
 
 terraform\.tfvars

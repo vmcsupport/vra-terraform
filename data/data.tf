@@ -30,3 +30,7 @@ data "aws_acm_certificate" "acmpublicdomain" {
   statuses    = ["ISSUED"]
   most_recent = true
 }
+
+data "aws_s3_bucket" "vra-alb-logs" {
+  bucket      = "vmc-sddc-vra-customer-alb-logs"
+}
