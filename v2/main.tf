@@ -152,7 +152,8 @@ resource "aws_lb_target_group" "alb_target_group" {
 resource "aws_lb_target_group_attachment" "customer_to_public_tg_attachment" { 
   for_each = {
     for pair in setproduct(keys(aws_lb_target_group.alb_target_group), var.computerip) :
-    floor("${pair[0]}${replace(pair[1],".", "")}" / 10000000) => {
+    "a${pair[0]}:${pair[1]}" => { 
+#    floor("${pair[0]}${replace(pair[1],".", "")}" / 10000000) => {
       target_group = aws_lb_target_group.alb_target_group[pair[0]]
       target_id  = pair[1]
     }
