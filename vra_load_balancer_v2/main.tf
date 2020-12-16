@@ -13,35 +13,36 @@ resource "aws_security_group" "ec2_security_groups" {
   )
 }
 
-resource "aws_security_group_rule" "ingress_rules_map" {
-  for_each = {
-    for pair in setproduct(values(var.ingress_rules), var.computerip) :
-    "${pair[0].port}:${pair[1]}" => {
-    port = pair[0].port
-    ip   = pair[1]
-    }
-  }
-  type              = "egress"
-  from_port         = each.value.port
-  to_port           = each.value.port
-  protocol          = "TCP"
-  cidr_blocks       = formatlist("%s/32", each.value.ip)
-  security_group_id = aws_security_group.ec2_security_groups.id
-}
+#resource "aws_security_group_rule" "ingress_rule" {
+#  for_each = {
+#    for pair in setproduct(var.ingress_rules, var.computerip) :
+#    "${pair[0].port}:${pair[1]}" => {
+#    port = pair[0].port
+#    ip   = pair[1]
+#    }
+#  }
+#  type              = "egress"
+#  from_port         = each.value.port
+#  to_port           = each.value.port
+#  protocol          = "TCP"
+#  cidr_blocks       = formatlist("%s/32", each.value.ip)
+#  security_group_id = aws_security_group.ec2_security_groups.id
+#}
 
 
 resource "aws_security_group_rule" "ingress_rules" {
-  for_each          = var.ingress_rules
+##  for_each = { for x in var.ingress_rules: x.cidr_blocks => x }
+  for_each = { for x in var.ingress_rules: x.port => x }
   type              = "ingress"
   from_port         = each.value["port"]
   to_port           = each.value["port"]
   protocol          = "TCP"
-  cidr_blocks       = each.value["cidr_blocks"]
+  cidr_blocks       = [each.value["cidr_blocks"]]
   security_group_id = aws_security_group.ec2_security_groups.id
 }
 
 resource "aws_security_group_rule" "egress_rules" {
-  for_each          = var.ingress_rules
+  for_each = { for x in var.ingress_rules: x.port => x }
   type              = "egress"
   from_port         = each.value["port"]
   to_port           = each.value["port"]
@@ -99,7 +100,7 @@ resource "aws_acm_certificate" "main" {
 }
 
 resource "aws_lb_listener" "alb_listen_rules" {
-  for_each          = var.ingress_rules
+  for_each = { for x in var.ingress_rules: x.port => x }
   load_balancer_arn = aws_lb.alb_public_to_vmc.arn
   port              = each.value["port"]
   protocol          = each.value["protocol"]
@@ -119,7 +120,7 @@ resource "aws_route53_record" "alb_public_record_to_vmc" {
 }
 
 resource "aws_lb_target_group" "alb_target_group" {
-  for_each             = var.ingress_rules
+  for_each = { for x in var.ingress_rules: x.port => x }
   name                 = join("-", ["vmc", var.custproj, each.key, "alb", module.datalookup.random_value.hex])
   port                 = each.value["port"]
   protocol             = each.value["protocol"]
@@ -151,7 +152,7 @@ resource "aws_lb_target_group" "alb_target_group" {
 resource "aws_lb_target_group_attachment" "customer_to_public_tg_attachment" { 
   for_each = {
     for pair in setproduct(keys(aws_lb_target_group.alb_target_group), var.computerip) :
-    "${pair[0]}:${pair[1]}" => {
+    floor("${pair[0]}${replace(pair[1],".", "")}" / 10000000) => {
       target_group = aws_lb_target_group.alb_target_group[pair[0]]
       target_id  = pair[1]
     }

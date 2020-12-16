@@ -60,3 +60,8 @@ output "s3_alb_logs" {
   description = "S3 bucket for alb logs"
   value       = data.aws_s3_bucket.vra-alb-logs
 }
+
+output "aws_ami" { 
+  description = "AMIs"
+  value       = data.aws_ami.example
+}

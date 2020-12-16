@@ -34,3 +34,14 @@ data "aws_acm_certificate" "acmpublicdomain" {
 data "aws_s3_bucket" "vra-alb-logs" {
   bucket      = "vmc-sddc-vra-customer-alb-logs"
 }
+
+
+data "aws_ami" "example" {
+  most_recent      = true
+  owners           = ["self"]
+
+  filter {
+    name   = "name"
+    values = ["win2016-goldenimage*"]
+  }
+}

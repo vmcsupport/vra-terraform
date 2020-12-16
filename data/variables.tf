@@ -1,9 +1,9 @@
 variable "mainvpcname" {
-  default = "ice-vmc-prod-vpc"
+  default = "ice-ad-modcloud-prod-vpc"
 }
 
 variable "transitvpcname" {
-  default = "ice-transit-vmc-prod-vpc"
+  default = "ice-transit-ad-modcloud-prod-vpc"
 }
 
 variable "publicdomain" {
@@ -13,6 +13,6 @@ variable "publicdomain" {
 variable "publicsubnetnames" {
   type        = list(string)
   description = "A list of subnet names each public subnet"
-  default     = ["ice-vmc-prod-puba", "ice-vmc-prod-pubb", "ice-vmc-prod-pubc"]
+  default     = ["ice-ad-modcloud-prod-puba", "ice-ad-modcloud-prod-pubb", "ice-ad-modcloud-prod-pubc"]
 }
 
