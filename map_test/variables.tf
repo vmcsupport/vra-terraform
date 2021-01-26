@@ -17,19 +17,16 @@ variable "custuin" {
 }
 
 ############### end of template ###############
-variable "computerip" {
-  type        = list
-  description = "ip to attach to the target group"
-  #  default     = ["192.168.56.131"]
-}
-
-variable "publicfriendlyname" {
-  type        = string
-  description = "Friendly dns name to attach to ALB instances"
-  default     = ""
-}
-
 variable "ingress_rules" {
+  type = map
+  #
+  #    port        = 4403
+  #    protocol    = "HTTPS"
+  #    cidr_blocks = ["0.0.0.0/0", "192.168.56.132/32"]
+  #
+}
+
+variable "ingress_rules_bad" {
   type = list(object({
     port        = number
     cidr_blocks = any
@@ -44,3 +41,14 @@ variable "ingress_rules" {
 #  ]
 }
 
+variable "computerip" {
+  type        = list
+  description = "ip to attach to the target group"
+  #  default     = ["192.168.56.131"]
+}
+
+variable "publicfriendlyname" {
+  type        = string
+  description = "Friendly dns name to attach to ALB instances"
+  default     = ""
+}
