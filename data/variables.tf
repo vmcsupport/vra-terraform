@@ -2,6 +2,9 @@ variable "mainvpcname" {
   default = "ice-ad-modcloud-prod-vpc"
 }
 
+variable "custexample" {
+}
+
 variable "transitvpcname" {
   default = "ice-transit-ad-modcloud-prod-vpc"
 }
@@ -13,6 +16,6 @@ variable "publicdomain" {
 variable "publicsubnetnames" {
   type        = list(string)
   description = "A list of subnet names each public subnet"
-  default     = ["ice-ad-modcloud-prod-puba", "ice-ad-modcloud-prod-pubb", "ice-ad-modcloud-prod-pubc"]
+  default     = ["ice-ad-modcloud-prod-puba"]
 }
 

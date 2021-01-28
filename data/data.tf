@@ -16,7 +16,16 @@ data "aws_subnet_ids" "public_subnets" {
   vpc_id = data.aws_vpc.mainvpc.id
   filter {
     name   = "tag:Name"
-    values = var.publicsubnetnames
+    values = ["ice-ad-${var.custexample}-prod-pub*"]   #  var.publicsubnetnames
+  }
+}
+
+data "aws_subnet_ids" "private_subnets" {
+  vpc_id = data.aws_vpc.mainvpc.id
+  filter {
+    name   = "tag:Name"
+    values = ["ice-ad-${var.custexample}-prod-pubc","ice-ad-${var.custexample}-prod-pubb"]
+#    values = var.publicsubnetnames
   }
 }
 
