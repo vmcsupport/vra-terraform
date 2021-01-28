@@ -18,14 +18,8 @@ variable "custexample" {
   default     = "modcloud"
 }
 
-variable "publicsubnetnames" {
-  type        = list(string)
-  description = "A list of subnet names each public subnet"
-  default     = ["ice-ad-modcloud-prod-pubc"]
-}
-
 variable "instance_name" {
   type        = string
-  description = "instance type"
+  description = "instance name"
 }
 

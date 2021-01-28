@@ -1,7 +1,6 @@
 module "datalookup" {
   source = "../data"
-  publicsubnetnames = ["ice-ad-${var.custexample}-prod-pubc"]
-#var.publicsubnetnames 
+  custexample = var.custexample
 }
 
 data "aws_ami" "latest" {
@@ -14,11 +13,12 @@ data "aws_ami" "latest" {
 }
 
 resource "aws_instance" "this" {
+ count         = 1# var.ec2_count
  ami           = data.aws_ami.latest.id
  instance_type = var.instance_type
- subnet_id = "subnet-04e15ab67ff977298"
-
-  tags = {
+ subnet_id = tolist(module.datalookup.public_subnets_ids)[count.index] #element(module.datalookup.public_subnets_ids,count.index)
+  
+ tags = {
     Name        = var.instance_name
   }
 
