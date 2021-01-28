@@ -1,3 +1,8 @@
+variable "cloudzone" {
+  type        = string
+  description = "VRA Cloud Zone"
+}
+
 variable "image" {
   type        = string
   description = "OS version"
